@@ -5,8 +5,8 @@
 /.idea/
 npm-debug.log
 index.js
-src/*.js
+src/**/*.js
 index.d.ts
-src/*.d.ts
+src/**/*.d.ts
 **/*.metadata.json
 **/*.ngfactory.ts

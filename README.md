@@ -193,7 +193,122 @@ export class AwesomeButtonComponent implements OnMount, OnInit {
 #### `<dynamic-html>` Constraints
 
 - `[content]` is **not a template**. so it cannot resolve `{{foo}}`, `*ngIf` and any template syntax.
- 
+
+### `*dynamicComponent="template"`
+
+`dynamicComponent` is a directive to create dynamic component which has the template.
+
+Example: 
+
+```ts
+@Component({
+  selector: 'dynamic-cmp-demo',
+  template: `
+    <div *dynamicComponent="template; context: {text: text};"></div>
+  `,
+})
+export class DynamicCmpDemoComponent {
+  template = `
+  <article>
+    <h1>Awesome Document</h1>
+    <div>
+      <p>{{text}}</p>
+      <my-button></my-button>
+    </div>
+  </article>
+  `;
+
+  text = 'foo';
+}
+
+@NgModule({
+  imports: [
+    CommonModule,
+  ],
+  declarations: [
+    MyComponent
+  ],
+  exports: [
+    MyComponent
+  ]
+})
+export class SharedModule { }
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    FormsModule,
+    SharedModule,
+    DynamicComponentModule.forRoot({
+      imports: [SharedModule]
+    }),
+  ],
+  declarations: [
+    AppComponent,
+    DynamicCmpDemoComponent,
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}
+```
+
+Result: 
+
+```html
+<my-app>
+    <ng-component>
+      <article>
+        <h1>Awesome Document</h1>
+        <div>
+          <p>foo</p>
+          <my-button>Click Me</my-button>
+        </div>
+      </article>
+    </ng-component>
+</my-app>
+```
+
+`<my-button>` is resolved as `MyButtonComponent`.
+
+#### `DynamicComponentModule`
+
+To use `dynamicComponent`, you have to import `DynamicComponentModule` with `forRoot` static method.
+Its argument is a `NgModule` metadata object:
+
+```ts
+/**
+ * Setup for DynamicComponentDirective
+ * 
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *     DynamicComponentModule.forRoot({
+ *       imports: [CommonModule]
+ *     })
+ *   ],
+ * })
+ * class AppModule {}
+ * ```
+ */
+```
+
+#### `dynamicComponent` Constraints
+
+`dynamicComponent` needs `RuntimeCompiler`. You can use AoT compilation, but you cannot eliminate the dependency on `@angular/compiler`.
+
+```ts
+import 'core-js/shim'; // reflect-metadata polyfill
+import 'zone.js/dist/zone';
+
+import {platformBrowser} from '@angular/platform-browser';
+import {COMPILER_PROVIDERS} from '@angular/compiler';
+import {AppModuleNgFactory} from './app.module.ngfactory';
+
+platformBrowser([
+    ...COMPILER_PROVIDERS, // RuntimeCompiler providers
+]).bootstrapModuleFactory(AppModuleNgFactory);
+```  
 
 ## License
 MIT
