@@ -4,7 +4,7 @@
   "description": "dynamic contents projection in Angular",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf **/*.ngfactory.* && rimraf **/*.metadata.json && rimraf src/**/*.js && rimraf src/**/*.d.ts && rimraf demo/**/*.js",
+    "clean": "rimraf {src,demo}/**/*.ngfactory.* && rimraf {src,demo}/**/*.metadata.json && rimraf {src,demo}/**/*.js && rimraf {src,demo}/**/*.d.ts",
     "build": "npm run lint && ngc -p .",
     "preversion": "npm run clean && npm test",
     "test": "npm run build && karma start karma.conf.js && npm run demo:build",
