@@ -1,0 +1,53 @@
+{
+  "name": "ng-dynamic",
+  "version": "1.0.0",
+  "description": "dynamic contents projection in Angular",
+  "main": "index.js",
+  "scripts": {
+    "clean": "npm run clean:src && npm run clean:demo",
+    "clean:src": "rimraf src/**/*.ngfactory.* && rimraf src/**/*.metadata.json && rimraf src/**/*.js && rimraf src/**/*.d.ts",
+    "clean:demo": "rimraf demo/**/*.ngfactory.* && rimraf demo/**/*.metadata.json && rimraf demo/**/*.js",
+    "ngc": "ngc -p .",
+    "ngc:demo": "ngc -p tsconfig.demo.json",
+    "build": "npm run ngc",
+    "prepublish": "npm run clean && npm test",
+    "test": "npm run ngc && karma start karma.conf.js && npm run demo:build",
+    "demo:build": "npm run ngc:demo && webpack demo/src/main.js demo/dist/main.js",
+    "demo:run": "static demo",
+    "demo": "npm run demo:build && npm run demo:run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laco0416/ng-dynamic.git"
+  },
+  "author": "laco <laco0416+github@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/core": "^2.0.0",
+    "@angular/platform-browser": "^2.0.0"
+  },
+  "devDependencies": {
+    "@angular/common": "^2.1.2",
+    "@angular/compiler": "^2.1.2",
+    "@angular/compiler-cli": "^2.1.2",
+    "@angular/core": "^2.1.2",
+    "@angular/forms": "^2.1.2",
+    "@angular/platform-browser": "^2.1.2",
+    "@angular/platform-browser-dynamic": "^2.1.2",
+    "@types/jasmine": "^2.2.33",
+    "core-js": "^2.4.1",
+    "jasmine": "^2.5.0",
+    "karma": "1.2.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "node-static": "^0.7.9",
+    "rimraf": "^2.5.4",
+    "rollup": "^0.36.3",
+    "rxjs": "^5.0.0-beta.12",
+    "systemjs": "^0.19.37",
+    "typescript": "^2.0.9",
+    "webpack": "^2.1.0-beta.26",
+    "zone.js": "^0.6.21"
+  }
+}
