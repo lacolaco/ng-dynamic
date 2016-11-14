@@ -3,7 +3,6 @@ import {
   ComponentRef,
   Compiler,
   Directive,
-  Inject,
   Input,
   NgModule,
   SimpleChanges,
@@ -116,7 +115,7 @@ export class DynamicComponentDirective implements OnDestroy {
         }
       });
   }
-  
+
   ngOnDestroy() {
     if (this.component) {
       this.component.destroy();

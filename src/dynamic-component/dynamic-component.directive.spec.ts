@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DynamicComponentDirective, DynamicComponentModule } from './index';
+import { DynamicComponentModule } from './index';
 
 @Component({
     template: `<div *dynamicComponent="template; context: context; selector:'my-component'"></div>`

@@ -1,10 +1,8 @@
 import {
   Component,
   ElementRef,
-  Inject,
   Input,
   SimpleChanges,
-  ViewContainerRef,
   OnChanges,
   OnDestroy,
   DoCheck,
@@ -59,10 +57,14 @@ export class DynamicHTMLComponent implements DoCheck, OnChanges, OnDestroy {
   }
 
   ngDoCheck() {
-    this.ref && this.ref.check();
+    if (this.ref) {
+      this.ref.check();
+    }
   }
 
   ngOnDestroy() {
-    this.ref && this.ref.destroy();
+    if (this.ref) {
+      this.ref.destroy();
+    }
   }
 }

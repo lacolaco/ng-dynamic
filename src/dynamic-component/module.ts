@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders, Compiler } from '@angular/core';
-import { RuntimeCompiler, COMPILER_PROVIDERS } from '@angular/compiler';
+import { RuntimeCompiler } from '@angular/compiler';
 import { DynamicComponentDirective } from './dynamic-component.directive';
 import { DynamicComponentOptions } from './options';
 

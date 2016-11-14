@@ -1,4 +1,4 @@
-import { OpaqueToken, NgModule, ModuleWithProviders, Type, ANALYZE_FOR_ENTRY_COMPONENTS } from '@angular/core';
+import { NgModule, ModuleWithProviders, ANALYZE_FOR_ENTRY_COMPONENTS } from '@angular/core';
 import { DynamicHTMLComponent } from './dynamic-html.component';
 import { DynamicHTMLOptions } from './options';
 import { DynamicHTMLRenderer } from './renderer';

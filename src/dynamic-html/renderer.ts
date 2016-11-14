@@ -33,7 +33,7 @@ export class DynamicHTMLRenderer {
         elementRef.nativeElement.innerHTML = html;
 
         const componentRefs: Array<ComponentRef<any>> = [];
-        this.options.components.forEach(({selector, component}) => {
+        this.options.components.forEach(({selector}) => {
             const elements = (elementRef.nativeElement as Element).querySelectorAll(selector);
             Array.prototype.forEach.call(elements, (el: Element) => {
                 const content = el.innerHTML;

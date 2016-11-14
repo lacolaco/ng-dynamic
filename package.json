@@ -4,17 +4,13 @@
   "description": "dynamic contents projection in Angular",
   "main": "index.js",
   "scripts": {
-    "clean": "npm run clean:src && npm run clean:demo",
-    "clean:src": "rimraf src/**/*.ngfactory.* && rimraf src/**/*.metadata.json && rimraf src/**/*.js && rimraf src/**/*.d.ts",
-    "clean:demo": "rimraf demo/**/*.ngfactory.* && rimraf demo/**/*.metadata.json && rimraf demo/**/*.js",
-    "ngc": "ngc -p .",
-    "ngc:demo": "ngc -p tsconfig.demo.json",
-    "build": "npm run ngc",
-    "prepublish": "npm run clean && npm test",
-    "test": "npm run ngc && karma start karma.conf.js && npm run demo:build",
-    "demo:build": "npm run ngc:demo && webpack demo/src/main.js demo/dist/main.js",
-    "demo:run": "static demo",
-    "demo": "npm run demo:build && npm run demo:run"
+    "clean": "rimraf **/*.ngfactory.* && rimraf **/*.metadata.json && rimraf src/**/*.js && rimraf src/**/*.d.ts && rimraf demo/**/*.js",
+    "build": "npm run lint && ngc -p .",
+    "preversion": "npm run clean && npm test",
+    "test": "npm run build && karma start karma.conf.js && npm run demo:build",
+    "demo:build": "ngc -p tsconfig.demo.json && webpack demo/src/main.js demo/dist/main.js",
+    "demo": "npm run demo:build && static demo",
+    "lint": "tslint -e **/*.ngfactory.ts --project tsconfig.json"
   },
   "repository": {
     "type": "git",
@@ -24,7 +20,8 @@
   "license": "MIT",
   "peerDependencies": {
     "@angular/core": "^2.0.0",
-    "@angular/platform-browser": "^2.0.0"
+    "@angular/platform-browser": "^2.0.0",
+    "@angular/compiler": "^2.0.0"
   },
   "devDependencies": {
     "@angular/common": "^2.1.2",
@@ -45,6 +42,7 @@
     "rimraf": "^2.5.4",
     "rxjs": "5.0.0-beta.12",
     "systemjs": "^0.19.37",
+    "tslint": "^3.15.1",
     "typescript": "^2.0.9",
     "webpack": "^2.1.0-beta.26",
     "zone.js": "^0.6.21"

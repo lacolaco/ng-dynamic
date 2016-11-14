@@ -1,6 +1,5 @@
 import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { DynamicHTMLModule, OnMount } from './index';
 
