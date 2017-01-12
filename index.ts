@@ -1,2 +1,2 @@
-export * from './src/dynamic-html';
-export * from './src/dynamic-component';
+export * from './src/dynamic-html/index';
+export * from './src/dynamic-component/index';

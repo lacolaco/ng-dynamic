@@ -9,4 +9,5 @@ src/**/*.js
 index.d.ts
 src/**/*.d.ts
 **/*.metadata.json
+**/*.ngsummary.json
 **/*.ngfactory.ts

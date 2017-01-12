@@ -38,6 +38,8 @@ export class DynamicHTMLRenderer {
             Array.prototype.forEach.call(elements, (el: Element) => {
                 const content = el.innerHTML;
                 const cmpRef = this.componentFactories.get(selector).create(this.injector, [], el);
+                // remove `ng-version` attribute
+                el.removeAttribute('ng-version');
                 if (cmpRef.instance.dynamicOnMount) {
                     const attrsMap = new Map<string, string>();
                     if (el.hasAttributes()) {

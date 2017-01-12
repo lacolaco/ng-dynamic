@@ -295,7 +295,7 @@ Its argument is a `NgModule` metadata object:
 
 #### `dynamicComponent` Constraints
 
-`dynamicComponent` needs `RuntimeCompiler`. You can use AoT compilation, but you cannot eliminate the dependency on `@angular/compiler`.
+`dynamicComponent` needs `JitCompiler`. You can use AoT compilation, but you cannot eliminate the dependency on `@angular/compiler`.
 
 ```ts
 import 'core-js/shim'; // reflect-metadata polyfill
@@ -306,7 +306,7 @@ import {COMPILER_PROVIDERS} from '@angular/compiler';
 import {AppModuleNgFactory} from './app.module.ngfactory';
 
 platformBrowser([
-    ...COMPILER_PROVIDERS, // RuntimeCompiler providers
+    ...COMPILER_PROVIDERS, // JitCompiler providers
 ]).bootstrapModuleFactory(AppModuleNgFactory);
 ```  
 
