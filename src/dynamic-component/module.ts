@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders, Compiler } from '@angular/core';
-import { RuntimeCompiler } from '@angular/compiler';
+import { JitCompiler } from '@angular/compiler';
 import { DynamicComponentDirective } from './dynamic-component.directive';
 import { DynamicComponentOptions } from './options';
 
@@ -27,7 +27,7 @@ export class DynamicComponentModule {
             ngModule: DynamicComponentModule,
             providers: [
                 {
-                    provide: Compiler, useExisting: RuntimeCompiler,
+                    provide: Compiler, useExisting: JitCompiler,
                 },
                 {
                     provide: DynamicComponentOptions, useValue: {

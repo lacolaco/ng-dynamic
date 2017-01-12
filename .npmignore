@@ -1,6 +1,8 @@
 *.ts
 *.spec.js
+*.spec.d.ts
 !*.d.ts
+*.ngsummary.json
 
 /node_modules/
 /demo/
