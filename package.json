@@ -1,6 +1,6 @@
 {
   "name": "ng-dynamic",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "dynamic contents projection in Angular",
   "main": "index.js",
   "scripts": {
