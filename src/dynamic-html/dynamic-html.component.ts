@@ -43,7 +43,7 @@ import { DynamicHTMLRenderer, DynamicHTMLRef } from './renderer';
 export class DynamicHTMLComponent implements DoCheck, OnChanges, OnDestroy {
   @Input() content: string;
 
-  private ref: DynamicHTMLRef;
+  private ref: DynamicHTMLRef = null;
 
   constructor(
     private renderer: DynamicHTMLRenderer,
@@ -51,6 +51,10 @@ export class DynamicHTMLComponent implements DoCheck, OnChanges, OnDestroy {
   ) { }
 
   ngOnChanges(_: SimpleChanges) {
+    if (this.ref) {
+      this.ref.destroy();
+      this.ref = null;
+    }
     if (this.content && this.elementRef) {
       this.ref = this.renderer.renderInnerHTML(this.elementRef, this.content);
     }
@@ -65,6 +69,7 @@ export class DynamicHTMLComponent implements DoCheck, OnChanges, OnDestroy {
   ngOnDestroy() {
     if (this.ref) {
       this.ref.destroy();
+      this.ref = null;
     }
   }
 }
