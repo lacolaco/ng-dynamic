@@ -1,6 +1,7 @@
 {
     "angularCompilerOptions": {
-        "debug": true
+        "debug": true,
+        "skipTemplateCodegen": true
     },
     "compilerOptions": {
         "target": "es5",

@@ -1,7 +1,11 @@
-import { NgModule, ModuleWithProviders, Compiler } from '@angular/core';
-import { JitCompiler } from '@angular/compiler';
+import { NgModule, ModuleWithProviders, Compiler, COMPILER_OPTIONS, CompilerOptions } from '@angular/core';
+import { JitCompilerFactory } from '@angular/compiler';
 import { DynamicComponentDirective } from './dynamic-component.directive';
 import { DynamicComponentOptions } from './options';
+
+export function createJitCompiler(options: CompilerOptions[]) {
+    return new JitCompilerFactory([{useDebug: false, useJit: true}]).createCompiler(options);
+}
 
 /**
  * Setup for DynamicComponentDirective
@@ -27,7 +31,7 @@ export class DynamicComponentModule {
             ngModule: DynamicComponentModule,
             providers: [
                 {
-                    provide: Compiler, useExisting: JitCompiler,
+                    provide: Compiler, useFactory: createJitCompiler, deps: [COMPILER_OPTIONS]
                 },
                 {
                     provide: DynamicComponentOptions, useValue: {
