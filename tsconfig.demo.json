@@ -1,6 +1,6 @@
 {
     "angularCompilerOptions": {
-        "genDir": "."
+        "genDir": "demo/ngfactory"
     },
     "compilerOptions": {
         "target": "es5",
