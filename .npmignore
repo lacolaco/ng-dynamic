@@ -13,4 +13,5 @@ npm-debug.log
 karma-test-shim.js
 karma.conf.js
 tsconfig.demo.json
+yarn.lock
 
