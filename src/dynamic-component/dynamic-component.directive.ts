@@ -110,7 +110,24 @@ export class DynamicComponentDirective implements OnDestroy {
         if (cmpFactory) {
           this.vcRef.clear();
           this.component = this.vcRef.createComponent(cmpFactory, 0, injector);
-          Object.assign(this.component.instance, this.context);
+
+          if (this.context !== null && this.context !== undefined) {
+            Object.assign(this.component.instance, this.context);
+
+            const proto = Object.getPrototypeOf(this.context);
+            // don't copy default functions from plain objects
+            if (proto !== undefined && proto !== null && proto !== Object.prototype) {
+
+              const func = Object
+                  .getOwnPropertyNames(proto)
+                  .filter((entry) => typeof this.context[entry] === 'function' && entry !== 'constructor');
+
+              let funcMap: any = {};
+              func.forEach((funcName) => funcMap[funcName] = this.context[funcName].bind(this.context));
+              Object.assign(this.component.instance, funcMap);
+            }
+          }
+
           this.component.changeDetectorRef.detectChanges();
         }
       });
