@@ -41,6 +41,17 @@ class MultipleCmp {
     ];
 }
 
+@Component({
+    template: `<div *dynamicComponent="template; context: this;"></div>`
+})
+class ButtonComponent {
+    template = `<div><button (click)="onButtonClicked($event)">Click me</button></div>`;
+
+    onButtonClicked() {
+        console.log('button clicked');
+    }
+}
+
 describe('dynamicComponent', () => {
 
     beforeEach(() => {
@@ -52,7 +63,7 @@ describe('dynamicComponent', () => {
                     declarations: [] // for issue #27
                 })
             ],
-            declarations: [MultipleCmp, TestCmp],
+            declarations: [MultipleCmp, TestCmp, ButtonComponent],
         });
     });
 
@@ -115,6 +126,22 @@ describe('dynamicComponent', () => {
             fixture.ngZone.onStable.subscribe(() => {
                 console.log(fixture.nativeElement.innerHTML);
                 expect(fixture.nativeElement.textContent).toBe(`${now}`);
+            });
+        });
+    }));
+
+    it('button clicked', async(() => {
+        TestBed.compileComponents().then(() => {
+            const fixture = TestBed.createComponent(ButtonComponent);
+            const component = fixture.componentInstance;
+            spyOn(component, 'onButtonClicked');
+
+            fixture.detectChanges();
+            fixture.ngZone.onStable.subscribe(() => {
+                let button = fixture.debugElement.nativeElement.querySelector('button');
+                button.click();
+                console.log(fixture.nativeElement.innerHTML);
+                expect(component.onButtonClicked).toHaveBeenCalled();
             });
         });
     }));
