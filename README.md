@@ -1,5 +1,7 @@
 # ng-dynamic
 
+## Since Angular 4.0, AoT compiler cannot coexist with JiT compiler. If you want to use DynamicComponentModule, you cannot use AoT compilation.
+
 Dynamic Content Projection in Angular 2+ 
 
 [![npm version](https://badge.fury.io/js/ng-dynamic.svg)](https://badge.fury.io/js/ng-dynamic)
@@ -295,20 +297,7 @@ Its argument is a `NgModule` metadata object:
 
 #### `dynamicComponent` Constraints
 
-`dynamicComponent` needs `JitCompiler`. You can use AoT compilation, but you cannot eliminate the dependency on `@angular/compiler`.
-
-```ts
-import 'core-js/shim'; // reflect-metadata polyfill
-import 'zone.js/dist/zone';
-
-import {platformBrowser} from '@angular/platform-browser';
-import {COMPILER_PROVIDERS} from '@angular/compiler';
-import {AppModuleNgFactory} from './app.module.ngfactory';
-
-platformBrowser([
-    ...COMPILER_PROVIDERS, // JitCompiler providers
-]).bootstrapModuleFactory(AppModuleNgFactory);
-```  
+`dynamicComponent` needs `JitCompiler`. You cannot use AoT compilation with DynamicComponentModule.
 
 ## License
 MIT
