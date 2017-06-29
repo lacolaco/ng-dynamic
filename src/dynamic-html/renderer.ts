@@ -26,6 +26,19 @@ export class DynamicHTMLRenderer {
         });
     }
 
+    private closestComponent(el: Element): Element {
+        el = el.parentElement;
+        while (el && el.tagName !== 'DYNAMIC-HTML') { // browser upper-cases tag names
+            for (const c of this.options.components) {
+                if (el.matches(c.selector)) {
+                    return el;
+                }
+            }
+            el = el.parentElement;
+        }
+        return el;
+    }
+
     renderInnerHTML(elementRef: ElementRef, html: string): DynamicHTMLRef {
         if (!isBrowserPlatform()) {
             throw new Error('dynamic-html supports only browser platform.');
@@ -36,6 +49,13 @@ export class DynamicHTMLRenderer {
         this.options.components.forEach(({selector}) => {
             const elements = (elementRef.nativeElement as Element).querySelectorAll(selector);
             Array.prototype.forEach.call(elements, (el: Element) => {
+                // We check that the component we found is not embedded in another component,
+                // and we don't handle it if it is the case. The component would not be shown
+                // anyway.
+                if (this.closestComponent(el) !== elementRef.nativeElement) {
+                    return;
+                }
+
                 const content = el.innerHTML;
                 const cmpRef = this.componentFactories.get(selector).create(this.injector, [], el);
                 // remove `ng-version` attribute
