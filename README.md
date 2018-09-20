@@ -1,3 +1,5 @@
+# THIS REPOSITORY IS NOT MAINTAINED
+
 # ng-dynamic
 
 ## Since Angular 4.0, AoT compiler cannot coexist with JiT compiler. If you want to use DynamicComponentModule, you cannot use AoT compilation.
@@ -5,7 +7,7 @@
 Dynamic Content Projection in Angular 2+ 
 
 [![npm version](https://badge.fury.io/js/ng-dynamic.svg)](https://badge.fury.io/js/ng-dynamic)
-[![CircleCI](https://circleci.com/gh/laco0416/ng-dynamic/tree/master.svg?style=svg)](https://circleci.com/gh/laco0416/ng-dynamic/tree/master)
+[![CircleCI](https://circleci.com/gh/lacolaco/ng-dynamic/tree/master.svg?style=svg)](https://circleci.com/gh/lacolaco/ng-dynamic/tree/master)
 
 ```
 $ npm install --save ng-dynamic
