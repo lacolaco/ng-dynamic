@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders, Compiler, COMPILER_OPTIONS, CompilerOptions, Optional } from '@angular/core';
-import { JitCompilerFactory } from '@angular/compiler';
+import { JitCompilerFactory } from '@angular/platform-browser-dynamic';
 import { DynamicComponentDirective } from './dynamic-component.directive';
 import { DynamicComponentOptions } from './options';
 
